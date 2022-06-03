@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskApp</title>
+    <script src="{{ url_for('static', filename='js/md5.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}" defer="true"></script>
+</head>
+<body>
+    <form id="loginform" action="/auth" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
