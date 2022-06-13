@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
+    <title>Cat App</title>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
-    <p>This is a cat's home</p>
+    <div class="container mb-5">
+        <div class="row d-flex justify-content-center">
+            <img src="{{ url_for('static', filename='images/home_cat.png') }}" id="icon" alt="User Icon" class="m-3 w-25" />
+        </div>
+        <div class="row d-flex justify-content-center m-3">
+            <code class="justify-content-center h4">NullSecCTF{MeoWWWW_L0gg3d_iN}</code>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <a href="/admin" class="btn btn-danger" >Edit Cat in Admin Panel</a>
+            <!-- TODO: Do not expose /secret -->
+        </div>
+    </div>
 </body>
 </html>

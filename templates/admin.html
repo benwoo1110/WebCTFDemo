@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
+    <title>Cat App</title>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
-    <code>NullSecCTF{I_g0t_4dm1n}</code>
+    <div class="container">
+        <div class="row d-flex justify-content-center m-3">
+            <code class="justify-content-center h4">NullSecCTF{I_g0t_4dm1n}</code>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <img src="{{ url_for('sdtatic', filename='images/admin_cat.png') }}" id="icon" alt="User Icon" class="m-3 w-25" />
+        </div>
+    </div>
 </body>
 </html>

@@ -2,15 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
+    <title>Cat App</title>
     <script src="{{ url_for('static', filename='js/md5.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/login.js') }}" defer="true"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}" defer="true"></script> <!-- TODO: Make login server-side -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
-    <form id="loginform" action="/auth" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Login">
-    </form>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="{{ url_for('static', filename='images/login_cat.png') }}" id="icon" alt="User Icon" class="m-3 w-25" />
+          </div>
+
+          <!-- Login Form -->
+          <form id="loginForm" action="/auth" method="post">
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
+
+          <p id="loginResult" class="text-danger"></p>
+      
+          <!-- Remind Password -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+
+        </div>
+      </div>
+</div>
 </body>
 </html>

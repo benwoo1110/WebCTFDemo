@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file, redirect, request, make_response, abort
+from flask import Flask, render_template, redirect, request, make_response, abort
 import jwt
 
 
@@ -10,12 +10,16 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/login')
 def login():
+    try:
+        token = request.cookies.get('token')
+        token = jwt.decode(token, secret_key, algorithms=['HS256'])
+        if token['username'] != 'benthecat': raise Exception('Invalid token')
+    except Exception:
+        pass
+    else:
+        return redirect('/home')
+
     return render_template('login.html')
 
 
@@ -28,7 +32,7 @@ def auth():
         resp = make_response(redirect("/home"))
         resp.set_cookie('token', token)
         return resp
-    return redirect('/login')
+    return redirect('/')
 
 
 @app.route('/home')
@@ -47,7 +51,8 @@ def home():
 def admin():
     try:
         token = request.cookies.get('token')
-        token = jwt.decode(token, secret, algorithms=['HS256'])
+        token = jwt.decode(token, secret_key, algorithms=['HS256'])
+        print(token)
         if token['username'] != 'benthecat' or token['type'] != 'admin': raise Exception('Invalid token')
     except Exception:
         return abort(403)
@@ -55,14 +60,9 @@ def admin():
     return render_template('admin.html')
 
 
-@app.route('/robots.txt')
-def robots():
-    return send_file("robots.txt")
-
-
 @app.route('/secret')
 def secret():
-    return secret
+    return secret_key
 
 
 if __name__ == '__main__':
