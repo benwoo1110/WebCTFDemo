@@ -5,6 +5,9 @@ import jwt
 with open('secret.txt', 'r') as f:
     secret_key = f.read()
 
+with open('secret2.txt', 'r') as f:
+    secret_key2 = f.read()
+
 
 app = Flask(__name__)
 
@@ -52,12 +55,23 @@ def admin():
     try:
         token = request.cookies.get('token')
         token = jwt.decode(token, secret_key, algorithms=['HS256'])
-        print(token)
         if token['username'] != 'benthecat' or token['type'] != 'admin': raise Exception('Invalid token')
     except Exception:
         return abort(403)
 
     return render_template('admin.html')
+
+
+@app.route('/bonus')
+def bonus():
+    try:
+        token = request.cookies.get('token')
+        token = jwt.decode(token, secret_key2, algorithms=['none', 'HS256'])
+        if token['username'] != 'benthecat' or token['type'] != 'bonus': raise Exception('Invalid token')
+    except Exception:
+        return abort(403)
+
+    return render_template('bonus.html')
 
 
 @app.route('/secret')
